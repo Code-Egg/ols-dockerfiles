@@ -25,14 +25,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - env:
-          OLS_VERSION: 1.6.20
-          PHP_VERSION: lsphp73 
-          FOLDER: template
-
       - name: Run tests
         run: |
-          cd $FOLDER
+          cd template
           docker ps 
 
   # Push image to GitHub Packages.
