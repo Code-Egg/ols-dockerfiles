@@ -39,6 +39,7 @@ build_image(){
 }
 
 test_image(){
+    echo 'test image'
     ID=$(docker run -d ${BUILDER}/${REPO}:${1}-${2})
     docker exec -it ${ID} su -c 'mkdir -p /var/www/vhosts/localhost/html/ \
     && echo "<?php phpinfo();" > /var/www/vhosts/localhost/html/index.php \
