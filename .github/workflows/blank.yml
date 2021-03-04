@@ -15,16 +15,18 @@ jobs:
         PHP_VERSION: [lsphp73, lsphp74]
         TAG: [latest,'']
     steps:
+      - run: echo ${{github.ref}}
       - uses: actions/checkout@v2
       - name: Run tests
         run: |
           cd ${FOLDER}; ls 
-          docker ps
-          which docker-compose 
-          bash build.sh -h
-          bash build.sh --ols 1.6.20 --php lsphp74
+          docker-compose -v
+          bash build.sh --ols ${{ matrix.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }}
           docker image ls
         env: 
           FOLDER: template 
           OLS_VERSION: 1.6.19
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
   
