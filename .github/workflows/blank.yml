@@ -21,7 +21,7 @@ jobs:
         run: |
           cd ${FOLDER}; ls 
           docker-compose -v
-          bash build.sh --ols ${OLS_VERSION} --php ${{ matrix.PHP_VERSION }} --tag ${{ TAG }}
+          bash build.sh --ols ${OLS_VERSION} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}
           docker image ls
         env: 
           FOLDER: template 
