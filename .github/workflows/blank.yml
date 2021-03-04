@@ -24,15 +24,15 @@ jobs:
       - name: Docker build and push
         if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
         run: |
-          cd ${env.FOLDER}
-          bash build.sh --ols ${env.OLS_VERSION} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }} --push
+          cd ${{ env.FOLDER }}
+          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }} --push
         env: 
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Docker build
         if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'pull_request' }}
         run: |
-          cd ${env.FOLDER}
-          bash build.sh --ols ${env.OLS_VERSION} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}            
+          cd ${{ env.FOLDER }}
+          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}            
 
   
