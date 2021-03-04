@@ -25,7 +25,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
         run: |
           cd ${{ env.FOLDER }}
-          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }} --push
+          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag "${{ matrix.TAG }}" --push
         env: 
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
