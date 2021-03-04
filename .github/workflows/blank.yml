@@ -21,10 +21,14 @@ jobs:
       - run: echo ${{github.event_name}}
       - uses: actions/checkout@v2
       - name: Run tests
-        if: github.ref == 'refs/heads/master'
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
         run: |
-          cd ${FOLDER}; bash build.sh --ols ${OLS_VERSION} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}
-
+          cd ${FOLDER}
+          bash build.sh --ols ${OLS_VERSION} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }} --push
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'pull_request' }}
+        run: |
+          cd ${FOLDER}
+          bash build.sh --ols ${OLS_VERSION} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}        
         env: 
           FOLDER: template 
           OLS_VERSION: 1.6.20
