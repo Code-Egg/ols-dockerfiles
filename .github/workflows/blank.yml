@@ -32,7 +32,7 @@ jobs:
           which docker-compose 
           bash build.sh -h
           bash build.sh --ols 1.6.20 --php lsphp74
-          docker ps
+          docker image ps
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   #push:
