@@ -17,8 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        PHP_VERSION: [lsphp73, lsphp74]
-        TAG: [latest,'']
+        PHP_VERSION: [lsphp74]
+        TAG: ['']
+        #PHP_VERSION: [lsphp73, lsphp74]
+        #TAG: [latest,'']
     steps:
       - uses: actions/checkout@v2
       - name: Docker build and push

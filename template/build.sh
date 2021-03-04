@@ -60,13 +60,19 @@ test_image(){
 push_image(){
     if [ ! -z "${PUSH}" ]; then
         if [ -f ~/.docker/litespeedtech/config.json ]; then
+            echo '~/.docker/litespeedtech/config.json exist'
             CONFIG=$(echo --config ~/.docker/litespeedtech)
         fi
+        echo 'PUSH A'
         docker ${CONFIG} push ${BUILDER}/${REPO}:${1}-${2}
+        echo 'PUSH B'
         if [ ! -z "${TAG}" ]; then
+            echo 'PUSH C'
             docker tag ${BUILDER}/${REPO}:${1}-${2} ${BUILDER}/${REPO}:${3}
             docker ${CONFIG} push ${BUILDER}/${REPO}:${3}
+            echo 'PUSH D'
         fi
+        echo 'PUSH E'
     else
         echo 'Skip Push.'    
     fi
