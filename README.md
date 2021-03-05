@@ -4,6 +4,15 @@
 [<img src="https://img.shields.io/badge/slack-LiteSpeed-blue.svg?logo=slack">](litespeedtech.com/slack) 
 [<img src="https://img.shields.io/twitter/follow/litespeedtech.svg?label=Follow&style=social">](https://twitter.com/litespeedtech)
 
+
+
+https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/Docker/badge.svg
+
+![Docker](https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/Docker/badge.svg)
+![master](https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/Docker/badge.svg?branch=feature-1)
+
+[![Docker](https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/Docker/badge.svg)](https://hub.docker.com/r/litespeedtech/openlitespeed)
+
 Install a lightweight OpenLiteSpeed container using either the Edge or Stable version in Ubuntu 18.04 Linux.
 
 ### Prerequisites
