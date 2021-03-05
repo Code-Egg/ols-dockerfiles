@@ -6,12 +6,12 @@
 
 
 
-https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/docker-build/badge.svg
+https://github.com/Code-Egg/ols-dockerfiles/workflows/docker-build/badge.svg
 
-![docker-build Actions Status](https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/docker-build/badge.svg)
-![master](https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/docker-build/badge.svg?branch=feature-1)
+![docker-build Actions Status](https://github.com/Code-Egg/ols-dockerfiles/workflows/docker-build/badge.svg)
+![master](https://github.com/Code-Egg/ols-dockerfiles/workflows/docker-build/badge.svg?branch=feature-1)
 
-[![Docker](https://github.com/Code-Egg/ols-dockerfiles/actions/workflows/docker-build/badge.svg)](https://github.com/Code-Egg/ols-dockerfiles/actions)
+[![Docker](https://github.com/Code-Egg/ols-dockerfiles/workflows/docker-build/badge.svg)](https://github.com/Code-Egg/ols-dockerfiles/actions)
 
 Install a lightweight OpenLiteSpeed container using either the Edge or Stable version in Ubuntu 18.04 Linux.
 
