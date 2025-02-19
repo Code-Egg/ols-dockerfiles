@@ -83,7 +83,7 @@ build_push_image(){
 main(){
     build_image ${OLS_VERSION} ${PHP_VERSION}
     test_image ${OLS_VERSION} ${PHP_VERSION}
-    push_image ${OLS_VERSION} ${PHP_VERSION} ${TAG}
+    build_push_image ${OLS_VERSION} ${PHP_VERSION} ${TAG}
 }
 
 check_input ${1}
