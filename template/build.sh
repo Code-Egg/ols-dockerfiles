@@ -63,16 +63,17 @@ test_image(){
     fi
 }
 
-push_image(){
+build_push_image(){
     if [ ! -z "${PUSH}" ]; then
         if [ -f ~/.docker/litespeedtech/config.json ]; then
             CONFIG=$(echo --config ~/.docker/litespeedtech)
         fi
-        docker ${CONFIG} push ${BUILDER}/${REPO}:${1}-${2}
+        docker buildx build . --platform linux/amd64,linux/arm64 --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
+        #docker ${CONFIG} push ${BUILDER}/${REPO}:${1}-${2}
         if [ ! -z "${TAG}" ]; then
-            docker tag ${BUILDER}/${REPO}:${1}-${2} ${BUILDER}/${REPO}:${3}
-            docker ${CONFIG} push ${BUILDER}/${REPO}:${3}
-            
+            #docker tag ${BUILDER}/${REPO}:${1}-${2} ${BUILDER}/${REPO}:${3}
+            #docker ${CONFIG} push ${BUILDER}/${REPO}:${3}
+            docker buildx build . --platform linux/amd64,linux/arm64 --tag ${BUILDER}/${REPO}:${3} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry
         fi
     else
         echo 'Skip Push.'    
