@@ -70,8 +70,9 @@ push_image(){
         fi
         docker ${CONFIG} push ${BUILDER}/${REPO}:${1}-${2}
         if [ ! -z "${TAG}" ]; then
-            docker tag ${BUILDER}/${REPO}:${1}-${2} ${BUILDER}/${REPO}:${3}
+            #docker tag ${BUILDER}/${REPO}:${1}-${2} ${BUILDER}/${REPO}:${3}
             docker ${CONFIG} push ${BUILDER}/${REPO}:${3}
+            
         fi
     else
         echo 'Skip Push.'    
