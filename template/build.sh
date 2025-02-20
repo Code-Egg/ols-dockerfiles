@@ -7,6 +7,7 @@ TAG=''
 BUILDER='eggcold'
 REPO='olstest'
 EPACE='        '
+ARCH='linux/amd64,linux/arm64'
 
 echow(){
     FLAG=${1}
@@ -20,6 +21,8 @@ help_message(){
     echo "${EPACE}${EPACE}Example: bash build.sh --ols 1.8.2 --php lsphp83"
     echow '--push'
     echo "${EPACE}${EPACE}Example: build.sh --ols 1.8.2 --php lsphp83 --push, will push to the dockerhub"
+    echow '--arch'
+    echo "${EPACE}${EPACE}Example: build.sh --ols 1.8.2 --php lsphp83 --arch=linux/amd64, will build image for amd64, otherwise linux/amd64,linux/arm64 will be applied."    
     exit 0
 }
 
@@ -35,9 +38,7 @@ build_image(){
     else
         echo "${1} ${2}"
         #docker build . --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2}
-        #docker build . --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --build-arg ARCH=${ARCH}
-        #docker build . --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2}
-        docker buildx build . --platform linux/amd64,linux/arm64 --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry
+        docker buildx build . --platform ${ARCH} --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry
     fi    
 }
 
@@ -64,13 +65,13 @@ build_push_image(){
     if [ ! -z "${PUSH}" ]; then
         if [ -f ~/.docker/litespeedtech/config.json ]; then
             CONFIG=$(echo --config ~/.docker/litespeedtech)
-        fi  #linux/amd64,linux/arm64
-        docker buildx build . --platform linux/amd64,linux/arm64 --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
+        fi
         #docker ${CONFIG} push ${BUILDER}/${REPO}:${1}-${2}
+        docker buildx build . --platform ${ARCH} --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
         if [ ! -z "${TAG}" ]; then
             #docker tag ${BUILDER}/${REPO}:${1}-${2} ${BUILDER}/${REPO}:${3}
             #docker ${CONFIG} push ${BUILDER}/${REPO}:${3}
-            docker buildx build . --platform linux/amd64,linux/arm64 --tag ${BUILDER}/${REPO}:${3} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
+            docker buildx build . --platform ${ARCH} --tag ${BUILDER}/${REPO}:${3} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
         fi
     else
         echo 'Skip Push.'    

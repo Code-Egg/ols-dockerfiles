@@ -18,16 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        PHP_VERSION: [lsphp83]
+        PHP_VERSION: [lsphp81, lsphp82, lsphp83]
         TAG: [latest,'']
     steps:
       - uses: actions/checkout@v2
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3      
       - name: Docker build and push
         if: ${{ (github.ref == 'refs/heads/master' && github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
         run: |
@@ -37,11 +31,10 @@ jobs:
         env: 
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      #- name: Docker build
-      #  if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' || (github.event_name == 'workflow_dispatch') }}
-        #if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'pull_request' }}
-      #  run: |
-      #    cd ${{ env.FOLDER }}
-      #    bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}            
+      - name: Docker build
+        if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'pull_request' }}
+        run: |
+          cd ${{ env.FOLDER }}
+          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}            
 
   
