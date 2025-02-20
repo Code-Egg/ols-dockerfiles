@@ -20,8 +20,6 @@ help_message(){
     echo "${EPACE}${EPACE}Example: bash build.sh --ols 1.8.2 --php lsphp83"
     echow '--push'
     echo "${EPACE}${EPACE}Example: build.sh --ols 1.8.2 --php lsphp83 --push, will push to the dockerhub"
-    echow '--arch [ARCH] (aarch64, x86_64)'
-    echo "${EPACE}${EPACE}Example: build.sh --ols 1.8.2 --php lsphp83 --arch aarch64, will build for ARM"    
     exit 0
 }
 
