@@ -7,7 +7,7 @@ TAG=''
 BUILDER='eggcold'
 REPO='olstest'
 EPACE='        '
-ARCH='linux/amd64,linux/arm64'
+ARCH='linux/amd64'
 
 echow(){
     FLAG=${1}
@@ -22,7 +22,7 @@ help_message(){
     echow '--push'
     echo "${EPACE}${EPACE}Example: build.sh --ols 1.8.2 --php lsphp83 --push, will push to the dockerhub"
     echow '--arch'
-    echo "${EPACE}${EPACE}Example: build.sh --ols 1.8.2 --php lsphp83 --arch=linux/amd64, will build image for amd64, otherwise linux/amd64,linux/arm64 will be applied."    
+    echo "${EPACE}${EPACE}Example: build.sh --ols 1.8.2 --php lsphp83 --arch linux/amd64,linux/arm64, will build image for both amd64 and arm64, otherwise linux/amd64 will be applied."    
     exit 0
 }
 

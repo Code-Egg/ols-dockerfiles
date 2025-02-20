@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        PHP_VERSION: [lsphp82, lsphp83]
+        PHP_VERSION: [lsphp83]
         TAG: [latest,'']
     steps:
       - uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           cd ${{ env.FOLDER }}
-          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag "${{ matrix.TAG }}" --push
+          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --arch 'linux/amd64,linux/arm64' --tag "${{ matrix.TAG }}" --push
         env: 
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -41,6 +41,6 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'pull_request' }}
         run: |
           cd ${{ env.FOLDER }}
-          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --tag ${{ matrix.TAG }}        
+          bash build.sh --ols ${{ env.OLS_VERSION }} --php ${{ matrix.PHP_VERSION }} --arch 'linux/amd64,linux/arm64' --tag ${{ matrix.TAG }}       
 
   
