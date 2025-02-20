@@ -2,17 +2,16 @@ FROM ubuntu:24.04
 
 ARG OLS_VERSION
 ARG PHP_VERSION
-#ARG ARCH
+ARG TARGETPLATFORM
 
 RUN apt-get update && apt-get install wget curl cron tzdata -y
 
-RUN wget https://openlitespeed.org/packages/openlitespeed-$OLS_VERSION.tgz && \
-    tar xzf openlitespeed-$OLS_VERSION.tgz && cd openlitespeed && ./install.sh && \
-    echo 'cloud-docker' > /usr/local/lsws/PLAT && rm -rf /openlitespeed && rm /openlitespeed-$OLS_VERSION.tgz
-
-#RUN wget https://openlitespeed.org/packages/openlitespeed-$OLS_VERSION-$ARCH-linux.tgz && \
-#tar xzf openlitespeed-$OLS_VERSION-$ARCH-linux.tgz && cd openlitespeed && ./install.sh && \
-#echo 'cloud-docker' > /usr/local/lsws/PLAT && rm -rf /openlitespeed && rm /openlitespeed-$OLS_VERSION-$ARCH-linux.tgz    
+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then ARCH=x86_64 \
+    elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCH=aarch64 \
+    else echo "$TARGETPLATFORM is not supported"; exit 1; fi \
+    wget https://openlitespeed.org/packages/openlitespeed-$OLS_VERSION-$ARCH-linux.tgz && \
+    tar xzf openlitespeed-$OLS_VERSION-$ARCH-linux.tgz && cd openlitespeed && ./install.sh && \
+    echo 'cloud-docker' > /usr/local/lsws/PLAT && rm -rf /openlitespeed && rm /openlitespeed-$OLS_VERSION-$ARCH-linux.tgz
 
 RUN wget -O - https://repo.litespeed.sh | bash
 

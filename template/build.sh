@@ -7,7 +7,6 @@ TAG=''
 BUILDER='eggcold'
 REPO='olstest'
 EPACE='        '
-ARCH=''
 
 echow(){
     FLAG=${1}
@@ -68,12 +67,12 @@ build_push_image(){
         if [ -f ~/.docker/litespeedtech/config.json ]; then
             CONFIG=$(echo --config ~/.docker/litespeedtech)
         fi  #linux/amd64,linux/arm64
-        docker buildx build . --platform linux/arm64 --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
+        docker buildx build . --platform linux/amd64,linux/arm64 --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
         #docker ${CONFIG} push ${BUILDER}/${REPO}:${1}-${2}
         if [ ! -z "${TAG}" ]; then
             #docker tag ${BUILDER}/${REPO}:${1}-${2} ${BUILDER}/${REPO}:${3}
             #docker ${CONFIG} push ${BUILDER}/${REPO}:${3}
-            docker buildx build . --platform linux/arm64 --tag ${BUILDER}/${REPO}:${3} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
+            docker buildx build . --platform linux/amd64,linux/arm64 --tag ${BUILDER}/${REPO}:${3} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry --push
         fi
     else
         echo 'Skip Push.'    
