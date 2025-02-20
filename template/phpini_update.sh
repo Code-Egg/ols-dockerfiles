@@ -23,7 +23,7 @@ config_php(){
     NEWKEY="memory_limit = 1024M"
     linechange 'memory_limit' ${PHPINICONF} "${NEWKEY}"
     killall lsphp >/dev/null 2>&1 
-    echoG 'Finish PHP Paremeter'
+    echo 'Finish PHP Paremeter'
 }
 
 config_php
