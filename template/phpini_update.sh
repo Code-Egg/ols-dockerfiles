@@ -2,7 +2,7 @@
 LSDIR='/usr/local/lsws'
 PHP_MAJOR=$(php -v | head -n 1 | cut -d " " -f 2 | awk -F '.' '{print $1}')
 PHP_MINOR=$(php -v | head -n 1 | cut -d " " -f 2 | awk -F '.' '{print $2}')
-PHPINICONF="${LSDIR}/lsphp${PHP_MAJOR}${PHP_MINOR}/etc/php/${PHP_MAJOR}.${PHP_MAJOR}/litespeed/php.ini"
+PHPINICONF="${LSDIR}/lsphp${PHP_MAJOR}${PHP_MINOR}/etc/php/${PHP_MAJOR}.${PHP_MINOR}/litespeed/php.ini"
 
 linechange(){
     LINENUM=$(grep -n "${1}" ${2} | cut -d: -f 1)
