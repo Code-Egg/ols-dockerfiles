@@ -36,13 +36,14 @@ build_image(){
     if [ -z "${1}" ] || [ -z "${2}" ]; then
         help_message
     else
-        echo "${1} ${2}"
+        echo "Build image: ${1} ${2}"
         #docker build . --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2}
         docker buildx build . --platform ${ARCH} --tag ${BUILDER}/${REPO}:${1}-${2} --build-arg OLS_VERSION=${1} --build-arg PHP_VERSION=${2} --output=type=registry
     fi    
 }
 
 test_image(){
+    echo "Test image"
     ID=$(docker run -d ${BUILDER}/${REPO}:${1}-${2})
     docker exec -i ${ID} su -c 'mkdir -p /var/www/vhosts/localhost/html/ \
     && echo "<?php phpinfo();" > /var/www/vhosts/localhost/html/index.php \
@@ -63,6 +64,7 @@ test_image(){
 
 build_push_image(){
     if [ ! -z "${PUSH}" ]; then
+        echo 'Push image'
         if [ -f ~/.docker/litespeedtech/config.json ]; then
             CONFIG=$(echo --config ~/.docker/litespeedtech)
         fi
